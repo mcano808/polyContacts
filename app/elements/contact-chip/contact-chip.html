@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../contact-status/contact-status.html">
+
+<polymer-element name="contact-chip" attributes="first last status">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .name{
+        font-size: 1.25em;
+        font-weight: 900;
+        padding-left: 10px;
+      }
+    </style>
+    <div layout horizontal center-center>
+      <!-- Status button-->
+      <contact-status status="{{status}}"></contact-status>
+      <!-- Content -->
+      <div class="name" flex>
+        {{last}}, {{first}}
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        // define element prototype here
+        publish:{
+          status:'cold',
+          first:'Mike',
+          last:'Cano'
+        }
+      });
+    })();
+  </script>
+</polymer-element>
