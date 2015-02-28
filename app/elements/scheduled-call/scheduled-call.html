@@ -1,0 +1,50 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../contact-chip/contact-chip.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/yoso-searchfield/yoso-searchfield.html">
+<!-- Responsible for getting today's/past due contacts and displaying in list -->
+<polymer-element name="scheduled-call" attributes="">
+  <template>
+    <link rel="stylesheet" href="scheduled-call.css">
+    <link rel="stylesheet" href="../../styles/palette.css">
+    <!-- Mock data- TODO Must make a service that gets todays & past due calls -->
+    <core-ajax auto
+               url="../../testData.json"
+               handleAs="json"
+               on-core-response="{{gotTodaysCalls}}"></core-ajax>
+    <div class="container" main layout vertical >
+      <div class="title">
+        Today's Calls
+      </div>
+      <div flex>
+        <template repeat="{{call in calls}}">
+          <contact-chip contact="{{call}}"></contact-chip>
+        </template>
+      </div>
+      <div class="searchbar default-primary-color" layout>
+          <!-- <paper-input label="Find..." value="{{searchValue}}" floatingLabel></paper-input> -->
+          <yoso-searchfield hint="Find somebody..." text={{searchValue}} ></yoso-searchfield>
+
+      </div>
+    </div>
+    <!-- Title for view -->
+
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        calls:[],
+        // define element prototype here
+        gotTodaysCalls: function(e, detail){
+          console.log('got todays calls', detail.response);
+          this.calls = detail.response.contacts;
+        },
+        searchValue:'',
+        searchValueChanged: function (){
+          console.log('search value changed', arguments);
+        }
+      });
+    })();
+  </script>
+</polymer-element>

@@ -1,38 +1,70 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../contact-chip/contact-chip.html">
-<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
-<polymer-element name="contact-app" attributes="">
+<link rel="import" href="../scheduled-call/scheduled-call.html">
+<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
+
+<polymer-element name="contact-app">
   <template>
     <style>
       :host {
         display: block;
       }
-      .sectionTitle{
-        font-weight: bolder;
-        background-color:#1976D2;
-        color: #FFF;
-        padding:3px;
-      }
-    </style>
-    <core-ajax auto
-               url="../../testData.json"
-               handleAs="json"
-               on-core-response="{{gotData}}"></core-ajax>
-    <div class="sectionTitle">Today's Calls</div>
-    <template repeat="{{contact in contacts}}">
-      <contact-chip first="{{contact.name.first}}" last="{{contact.name.last}}" status="{{contact.contacts[0].status}}"></contact-chip>
-    </template>
 
+      .newContact{
+        position: absolute!important;
+        bottom:-15px;
+        right:5px;
+
+      }
+      :host /deep/ core-toolbar{
+        background-color:#388E3C;
+      }
+
+    </style>
+    <core-scaffold>
+      <!-- Left Side (Collapsing) -->
+      <nav>
+        <core-toolbar>
+
+        </core-toolbar>
+        <ul>
+          <li>Something</li>
+          <li>
+            Goes
+          </li>
+          <li>
+            Here...
+          </li>
+        </ul>
+      </nav>
+      <!-- Right side and main content -->
+      <core-toolbar tool flex>
+        Contacts!
+        <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
+      </core-toolbar>
+      <div>
+        <scheduled-call></scheduled-call>
+      </div>
+    </core-scaffold>
   </template>
   <script>
     (function () {
       Polymer({
         // define element prototype here
+        contacts:null,
         gotData: function(evt, detail){
           console.log('got test data:', arguments);
           this.contacts = detail.response.contacts;
         },
-        contacts:null
+        newContact:function(e, detail, target){
+          console.log('making new contact: ', arguments)
+        }
+
       });
     })();
   </script>

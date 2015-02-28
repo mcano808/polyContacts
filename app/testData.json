@@ -29,25 +29,25 @@
     "contacts":[{
       "contactId":1,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"hot"
     },{
-      "contactId":1,
+      "contactId":2,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"hot"
     },{
-      "contactId":1,
+      "contactId":3,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"hot"
     },{
-      "contactId":1,
+      "contactId":4,
       "curDate":"",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"hot"
     }]
@@ -82,25 +82,25 @@
     "contacts":[{
       "contactId":1,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
-      "status":"hot"
+      "status":"warm"
     },{
       "contactId":2,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
-      "status":"cold"
+      "status":"neutral"
     },{
       "contactId":3,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"warm"
     },{
       "contactId":4,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"hot"
     }]
@@ -135,27 +135,133 @@
     "contacts":[{
       "contactId":1,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
-      "status":"cold"
+      "status":"neutral"
     },{
       "contactId":2,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"cold"
     },{
       "contactId":3,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"warm"
     },{
       "contactId":4,
       "curDate": "",
-      "fUpDate": "",
+      "fUpDtg": "",
       "notes":"Some notes go here",
       "status":"hot"
     }]
-  }]
+  },{
+      "exported":false,
+      "sold":false,
+      "active":true,
+      "dateEntered":"Some date",
+      "name":{
+        "first": "Jose",
+        "last":"Cano",
+        "middle":"Salvador"
+      },
+      "address":{
+        "street": "16868 East Fair Place",
+        "street2":"",
+        "city":"Aurora",
+        "state":"Colorado",
+        "zip":"80016"
+      },
+      "contact":{
+        "cell":"1234567890",
+        "home":"1234567890",
+        "email":"me@you.com",
+        "fax":"1234567890"
+      },
+      "social":{
+        "twitter":"@mikeTwitter",
+        "facebook":"myFacebookpage.com",
+        "website":"myWebPage.biz"
+      },
+      "contacts":[{
+        "contactId":1,
+        "curDate": "",
+        "fUpDtg": "",
+        "notes":"Some notes go here",
+        "status":"cold"
+      },{
+        "contactId":2,
+        "curDate": "",
+        "fUpDtg": "",
+        "notes":"Some notes go here",
+        "status":"hot"
+      },{
+        "contactId":3,
+        "curDate": "",
+        "fUpDtg": "",
+        "notes":"Some notes go here",
+        "status":"hot"
+      },{
+        "contactId":4,
+        "curDate":"",
+        "fUpDtg": "",
+        "notes":"Some notes go here",
+        "status":"hot"
+      }]
+    },{
+        "exported":false,
+        "sold":false,
+        "active":true,
+        "dateEntered":"Some date",
+        "name":{
+          "first": "Arie",
+          "last":"Cano",
+          "middle":"kittykat"
+        },
+        "address":{
+          "street": "16868 East Fair Place",
+          "street2":"",
+          "city":"Aurora",
+          "state":"Colorado",
+          "zip":"80016"
+        },
+        "contact":{
+          "cell":"1234567890",
+          "home":"1234567890",
+          "email":"me@you.com",
+          "fax":"1234567890"
+        },
+        "social":{
+          "twitter":"@mikeTwitter",
+          "facebook":"myFacebookpage.com",
+          "website":"myWebPage.biz"
+        },
+        "contacts":[{
+          "contactId":1,
+          "curDate": "",
+          "fUpDtg": "",
+          "notes":"Some notes go here",
+          "status":"freezing"
+        },{
+          "contactId":2,
+          "curDate": "",
+          "fUpDtg": "",
+          "notes":"Some notes go here",
+          "status":"hot"
+        },{
+          "contactId":3,
+          "curDate": "",
+          "fUpDtg": "",
+          "notes":"Some notes go here",
+          "status":"hot"
+        },{
+          "contactId":4,
+          "curDate":"",
+          "fUpDtg": "",
+          "notes":"Some notes go here",
+          "status":"hot"
+        }]
+      }]
 }

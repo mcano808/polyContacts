@@ -1,36 +1,68 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../contact-status/contact-status.html">
+<link rel="import" href="../../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../../bower_components/core-icon/core-icon.html">
+<!--
+    Responsible for displaying a contact line.  Requires a contact object
+    @Event- Fires event "click-contactline"
 
-<polymer-element name="contact-chip" attributes="first last status">
+  -->
+<polymer-element name="contact-chip" attributes="contact">
   <template>
     <style>
       :host {
         display: block;
+        margin:16px 0;
+      }
+      .bigIcon{
+        height:32px;
+        width:32px;
       }
       .name{
         font-size: 1.25em;
         font-weight: 900;
-        padding-left: 10px;
+        padding-left: 20px;
       }
+      .contactLine{
+        padding-left: 50px;
+      }
+    /*
+        Style for icons based on status
+    */
+    .hot{
+        color:#F44336;
+    }
+    .warm{
+        color: #FFEB3B;
+    }
+    .neutral{
+        color: #9E9E9E;
+    }
+    .cold{
+        color: #03A9F4;
+    }
+    .freezing{
+        color: #3F51B5;
+    }
     </style>
-    <div layout horizontal center-center>
+    <div class="contactLine" layout horizontal on-click="{{eventClickLine}}">
       <!-- Status button-->
-      <contact-status status="{{status}}"></contact-status>
+      <core-icon icon="account-circle" class="{{contact.contacts[0].status}} bigIcon"></core-icon>
       <!-- Content -->
       <div class="name" flex>
-        {{last}}, {{first}}
+        {{contact.name.last}}, {{contact.name.first}} - {{contact.fUpDtg}}  <!--TODO Change the DTG to calculate a value like " In 3 hours"-->
       </div>
     </div>
   </template>
   <script>
     (function () {
       Polymer({
-        // define element prototype here
-        publish:{
-          status:'cold',
-          first:'Mike',
-          last:'Cano'
-        }
+      eventClickLine: function(e, detail){
+          console.log(this.first + ' just fired click line event',this.contact );
+          this.fire('click-contactline', {name:this.contact});
+      },
+      publish:{
+        contact:{}
+      }
       });
     })();
   </script>
