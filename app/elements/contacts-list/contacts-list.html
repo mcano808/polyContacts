@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-list/core-list.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="contacts-list" attributes="">
+  <template>
+    <link rel="stylesheet" href="contacts-list.css">
+    <link rel="stylesheet" href="../../styles/palette.css">
+    <style>
+      .contact_list{
+        font-size: .6em;
+        padding:5px 3px
+      }
+      .contact{
+        padding:6px;
+      }
+
+    </style>
+    <!-- Get the mock data.  TODO this needs to hit a aservice to get 'all' contacts. -->
+    <core-ajax auto
+              url="../../testData.json"
+              handleAs="json"
+              on-core-response="{{gotContacts}}">
+    </core-ajax>
+    <ul>
+      <template repeat="{{cont in allContacts}}">
+        <li class="contact secondary-text-color">{{cont.name.last}}, {{cont.name.first}} </li>
+      </template>
+    </ul>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        // define element prototype here
+        allContacts:[],
+        eventClickLine: function(e, detail){
+          this.fire('click-contactline', selectedContact);
+        },
+        gotContacts:function(e, detail){
+          console.log('got all contacts:', detail.response.contacts.length);
+          this.allContacts = detail.response.contacts;
+        },
+        //This is tied to the core list to track wich contact is selected.
+        selectedContact:null
+      });
+    })();
+  </script>
+</polymer-element>

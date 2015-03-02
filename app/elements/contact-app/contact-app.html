@@ -1,5 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../scheduled-call/scheduled-call.html">
+<link rel="import" href="../contacts-list/contacts-list.html">
+<link rel="import" href="../contact-card/contact-card.html">
+<link rel="import" href="../new-contact/new-contact.html">
+<link rel="import" href="../auto-scroller/auto-scroller.html">
 <link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
@@ -25,31 +29,35 @@
         background-color:#388E3C;
       }
 
+      .contact_list_title{
+        font-size: .80em;
+      }
     </style>
     <core-scaffold>
       <!-- Left Side (Collapsing) -->
       <nav>
-        <core-toolbar>
-
+        <core-toolbar layout center-center>
+        <span class="contact_list_title secondary-text-color">Contact List</span>
         </core-toolbar>
-        <ul>
-          <li>Something</li>
-          <li>
-            Goes
-          </li>
-          <li>
-            Here...
-          </li>
-        </ul>
+        <div layout horizontal>
+        <contacts-list flex></contacts-list>
+        <auto-scroller></auto-scroller>
+        </div>
+
       </nav>
       <!-- Right side and main content -->
       <core-toolbar tool flex>
         Contacts!
         <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
       </core-toolbar>
-      <div>
-        <scheduled-call></scheduled-call>
-      </div>
+      <core-animated-pages selected="{{selectedPage}}">
+        <section>
+          <scheduled-call></scheduled-call>
+        </section>
+        <section>
+          <contact-card contact="{{selectedContact}}"></contact-card>
+        </section>
+      </core-animated-pages>
     </core-scaffold>
   </template>
   <script>
@@ -63,7 +71,8 @@
         },
         newContact:function(e, detail, target){
           console.log('making new contact: ', arguments)
-        }
+        },
+        selectedPage:0
 
       });
     })();

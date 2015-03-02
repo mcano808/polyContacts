@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="auto-scroller" attributes="">
+  <template>
+    <link rel="stylesheet" href="auto-scroller.css">
+    <div id="scroll_container" layout vertcal justified>
+      <template repeat="{{label in scrollLabels}}">
+        <div class="scroll_label" on-click="{{labelSelected}}" letter="{{label}}">{{label}}</div>
+      </template>
+
+    </div>
+
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        // define element prototype here
+        /**
+          * CUSTOM EVENT
+          * Event name: letterselected
+          */
+        labelSelected:function(e, detail, target){
+          console.log('made a selection', target.attributes.letter.value);
+          var selected = null;
+          if(target.attributes.letter !== undefined){
+            selected = target.attributes.letter;
+          }
+          this.fire('letterselected', selected);
+        },
+        scrollLabels:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+      });
+    })();
+  </script>
+</polymer-element>

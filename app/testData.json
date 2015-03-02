@@ -3,6 +3,7 @@
     "sold":false,
     "active":true,
     "dateEntered":"Some date",
+    "addedToFacebook":true,
     "name":{
       "first": "Mike",
       "last":"Cano",
@@ -56,6 +57,7 @@
     "sold":false,
     "active":true,
     "dateEntered":"",
+    "addedToFacebook":false,
     "name":{
       "first": "Gabriel",
       "last":"Cano",
@@ -109,6 +111,7 @@
     "sold":false,
     "active":true,
     "dateEntered":"",
+    "addedToFacebook":true,
     "name":{
       "first": "Kimberly",
       "last":"Cano",
@@ -162,6 +165,7 @@
       "sold":false,
       "active":true,
       "dateEntered":"Some date",
+      "addedToFacebook":false,
       "name":{
         "first": "Jose",
         "last":"Cano",
@@ -215,6 +219,7 @@
         "sold":false,
         "active":true,
         "dateEntered":"Some date",
+      "addedToFacebook":false,
         "name":{
           "first": "Arie",
           "last":"Cano",

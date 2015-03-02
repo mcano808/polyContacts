@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+#scroll_container{
+  text-align: center;
+  height: 100%;
+}
+.scroll_label{
+  font-size: .75em;
+  padding: 2px;
+}
