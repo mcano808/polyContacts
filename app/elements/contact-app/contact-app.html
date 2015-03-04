@@ -53,7 +53,7 @@
           <yoso-searchfield hint="Find me..." text={{searchValue}} flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
-        <contacts-list flex></contacts-list>
+        <contacts-list flex id="contactList"></contacts-list>
         <auto-scroller></auto-scroller>
         </div>
       </nav>
@@ -67,9 +67,9 @@
       </core-toolbar>
 
       <!-- Main page Content here -->
-      <core-animated-pages selected="{{selectedPage}}" layout vertical fit>
+      <core-animated-pages selected="{{selectedPage}}" transitions="slide-from-right" layout vertical fit>
         <section>
-          <scheduled-call></scheduled-call>
+          <scheduled-call id="scheduledCalls"></scheduled-call>
         </section>
         <section>
           <contact-card contact="{{selectedContact}}"></contact-card>
@@ -80,6 +80,21 @@
   <script>
     (function () {
       Polymer({
+        domReady:function(){
+          //Attach event listeners for when a contact li has been clicked for contact-list and scheduled-calls.
+          console.log
+          this.$.contactList.addEventListener('click-contactline',this.showContactCard);
+          this.$.scheduledCalls.addEventListener('click-contactline', this.showContactCard);
+          //Private handler function to trigger page change to Contact card with the selected contact passed.
+
+        },
+        showContactCard:function (e){
+            console.warn('click-contactline heard:', e.detail.contact);
+            this.selectedContact = e.detail.contact;
+          console.log('selected contact:', this.selectedContact);
+            //Show the contact card page with this contact info
+          this.selectedPage = 1;
+        },
         // define element prototype here
         contacts:null,
         gotData: function(evt, detail){
@@ -89,6 +104,7 @@
         newContact:function(e, detail, target){
           console.log('making new contact: ', arguments)
         },
+        selectedContact:null,
         selectedPage:0,
         pageTitle: 'Today...'
 

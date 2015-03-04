@@ -23,8 +23,8 @@
               on-core-response="{{gotContacts}}">
     </core-ajax>
     <ul>
-      <template repeat="{{cont in allContacts}}">
-        <li class="contact secondary-text-color" on-tap="{{eventClickLine}}">{{cont.name.last}}, {{cont.name.first}} </li>
+      <template repeat="{{contact in allContacts}}">
+        <li class="contact secondary-text-color" on-tap="{{eventClickLine}}">{{contact.name.last}}, {{contact.name.first}} </li>
       </template>
     </ul>
   </template>
@@ -34,8 +34,8 @@
         // define element prototype here
         allContacts:[],
         eventClickLine: function(e, detail, elem){
-          console.info('Contact selected: ', elem.templateInstance_.model.cont);
-          this.fire('click-contactline', elem.templateInstance_.model.cont);
+          console.info('Contact selected: ', elem.templateInstance_.model.contact);
+          this.fire('click-contactline', {contact:elem.templateInstance_.model.contact});
         },
         gotContacts:function(e, detail){
           console.log('got all contacts:', detail.response.contacts.length);

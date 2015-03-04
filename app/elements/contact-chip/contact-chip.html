@@ -60,7 +60,7 @@
       Polymer({
       eventClickLine: function(e, detail){
           console.log(this.contact.name.first + ' just fired click line event',this.contact );
-          this.fire('click-contactline', {name:this.contact});
+          this.fire('click-contactline', {contact:this.contact});
       },
       publish:{
         contact:{}
