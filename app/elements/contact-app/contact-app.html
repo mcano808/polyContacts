@@ -23,8 +23,9 @@
 
       .newContact{
         position: absolute!important;
-        bottom:-15px;
-        right:5px;
+        bottom:-10px;
+        right:-20px;
+        z-index:10;
 
       }
       :host /deep/ core-toolbar{
@@ -40,26 +41,32 @@
         width:40px;
         color:#cddc39;
       }
+      .page-title{
+        font-size: 1.5em;
+      }
 
     </style>
     <core-scaffold>
       <!-- Left Side (Collapsing) -->
       <nav>
-        <core-toolbar layout center-center>
-        <span class="contact_list_title secondary-text-color">Contact List</span>
+        <core-toolbar layout horizonal>
+          <yoso-searchfield hint="Find me..." text={{searchValue}} flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
         <contacts-list flex></contacts-list>
         <auto-scroller></auto-scroller>
         </div>
-
       </nav>
+
       <!-- Right side and main content -->
       <core-toolbar tool flex>
-        <core-icon class="logo" icon="perm-phone-msg"></core-icon>
-        <yoso-searchfield hint="Find somebody..." text={{searchValue}} flex></yoso-searchfield>
+        <div layout horizontal flex>
+          <span class="page-title" flex>{{pageTitle}}</span>
+        </div>
         <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
       </core-toolbar>
+
+      <!-- Main page Content here -->
       <core-animated-pages selected="{{selectedPage}}" layout vertical fit>
         <section>
           <scheduled-call></scheduled-call>
@@ -82,7 +89,8 @@
         newContact:function(e, detail, target){
           console.log('making new contact: ', arguments)
         },
-        selectedPage:0
+        selectedPage:0,
+        pageTitle: 'Today...'
 
       });
     })();

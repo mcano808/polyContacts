@@ -14,24 +14,15 @@
                handleAs="json"
                on-core-response="{{gotTodaysCalls}}"></core-ajax>
     <div class="container" main layout vertical >
-      <div class="title">
-        Today's Calls
-      </div>
       <div>
-        <yoso-searchfield hint="Find somebody..." text={{searchValue}} ></yoso-searchfield>
+        <yoso-searchfield hint="Find me..." text={{searchValue}} ></yoso-searchfield>
       </div>
       <div flex>
         <template repeat="{{call in calls}}">
           <contact-chip contact="{{call}}"></contact-chip>
         </template>
       </div>
-      <div class="searchbar default-primary-color" layout>
-          <!-- <paper-input label="Find..." value="{{searchValue}}" floatingLabel></paper-input> -->
-
-
-      </div>
     </div>
-    <!-- Title for view -->
 
   </template>
   <script>

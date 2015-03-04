@@ -24,7 +24,7 @@
     </core-ajax>
     <ul>
       <template repeat="{{cont in allContacts}}">
-        <li class="contact secondary-text-color">{{cont.name.last}}, {{cont.name.first}} </li>
+        <li class="contact secondary-text-color" on-tap="{{eventClickLine}}">{{cont.name.last}}, {{cont.name.first}} </li>
       </template>
     </ul>
   </template>
@@ -33,8 +33,9 @@
       Polymer({
         // define element prototype here
         allContacts:[],
-        eventClickLine: function(e, detail){
-          this.fire('click-contactline', selectedContact);
+        eventClickLine: function(e, detail, elem){
+          console.info('Contact selected: ', elem.templateInstance_.model.cont);
+          this.fire('click-contactline', elem.templateInstance_.model.cont);
         },
         gotContacts:function(e, detail){
           console.log('got all contacts:', detail.response.contacts.length);
