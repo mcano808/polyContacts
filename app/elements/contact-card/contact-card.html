@@ -1,13 +1,17 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="contact-card" attributes="">
+<polymer-element name="contact-card">
   <template>
     <link rel="stylesheet" href="contact-card.css">
+
   </template>
   <script>
     (function () {
       Polymer({
         // define element prototype here
+        publish:{
+          selectedContact:{}
+        }
       });
     })();
   </script>

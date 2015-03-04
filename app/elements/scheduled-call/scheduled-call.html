@@ -17,6 +17,9 @@
       <div class="title">
         Today's Calls
       </div>
+      <div>
+        <yoso-searchfield hint="Find somebody..." text={{searchValue}} ></yoso-searchfield>
+      </div>
       <div flex>
         <template repeat="{{call in calls}}">
           <contact-chip contact="{{call}}"></contact-chip>
@@ -24,7 +27,7 @@
       </div>
       <div class="searchbar default-primary-color" layout>
           <!-- <paper-input label="Find..." value="{{searchValue}}" floatingLabel></paper-input> -->
-          <yoso-searchfield hint="Find somebody..." text={{searchValue}} ></yoso-searchfield>
+
 
       </div>
     </div>
