@@ -50,7 +50,7 @@
       <!-- Left Side (Collapsing) -->
       <nav>
         <core-toolbar layout horizonal>
-          <yoso-searchfield hint="Find me..." text={{searchValue}} flex></yoso-searchfield>
+          <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
         <contacts-list flex id="contactList"></contacts-list>
@@ -63,37 +63,28 @@
         <div layout horizontal flex>
           <span class="page-title" flex>{{pageTitle}}</span>
         </div>
-        <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
+        <template if="{{selectedPage === 0}}">
+          <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
+        </template>
+        <template if="{{selectedPage === 1}}">
+          <paper-fab icon="arrow-back" class="newContact accent-color" on-tap="{{backToStart}}"></paper-fab>
+        </template>
       </core-toolbar>
 
       <!-- Main page Content here -->
       <core-animated-pages selected="{{selectedPage}}" transitions="slide-from-right" layout vertical fit>
-        <section>
-          <scheduled-call id="scheduledCalls"></scheduled-call>
-        </section>
-        <section>
-          <contact-card contact="{{selectedContact}}"></contact-card>
-        </section>
+        <scheduled-call id="scheduledCalls" selContact="{{selectedContact}}"></scheduled-call>
+        <contact-card contact="{{selectedContact}}"></contact-card>
       </core-animated-pages>
     </core-scaffold>
   </template>
   <script>
     (function () {
       Polymer({
-        domReady:function(){
-          //Attach event listeners for when a contact li has been clicked for contact-list and scheduled-calls.
-          console.log
-          this.$.contactList.addEventListener('click-contactline',this.showContactCard);
-          this.$.scheduledCalls.addEventListener('click-contactline', this.showContactCard);
-          //Private handler function to trigger page change to Contact card with the selected contact passed.
-
-        },
-        showContactCard:function (e){
-            console.warn('click-contactline heard:', e.detail.contact);
-            this.selectedContact = e.detail.contact;
-          console.log('selected contact:', this.selectedContact);
-            //Show the contact card page with this contact info
-          this.selectedPage = 1;
+        backToStart:function (e){
+          this.selectedPage = 0;
+          //DO NOT CHANGE selectedContact as this will make the page cycle again.
+          this.pageTitle = 'Today...'
         },
         // define element prototype here
         contacts:null,
@@ -104,9 +95,20 @@
         newContact:function(e, detail, target){
           console.log('making new contact: ', arguments)
         },
-        selectedContact:null,
+        selectedContact:{},
         selectedPage:0,
-        pageTitle: 'Today...'
+        pageTitle: 'Today...',
+        selectedPageChanged: function(ov, nv){
+          console.log('selectedPage changed', arguments);
+        },
+        selectedContactChanged: function(ov, nv){
+          console.log('selected contact changed', arguments);
+          //Change selected page to contact card
+          this.selectedPage = 1;
+          //Set the contact name as the page title
+          this.pageTitle = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
+          //Add a back button someplace to go back to today's contacts.
+        }
 
       });
     })();

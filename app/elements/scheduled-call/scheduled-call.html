@@ -4,7 +4,7 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/yoso-searchfield/yoso-searchfield.html">
 <!-- Responsible for getting today's/past due contacts and displaying in list -->
-<polymer-element name="scheduled-call" attributes="">
+<polymer-element name="scheduled-call" attributes="selContact">
   <template>
     <link rel="stylesheet" href="scheduled-call.css">
     <link rel="stylesheet" href="../../styles/palette.css">
@@ -28,6 +28,11 @@
   <script>
     (function () {
       Polymer({
+        ready:function(){
+          this.addEventListener('click-contactline', function(e){
+            this.selContact = e.detail.contact;
+          })
+        },
         calls:[],
         // define element prototype here
         gotTodaysCalls: function(e, detail){
@@ -35,9 +40,7 @@
           this.calls = detail.response.contacts;
         },
         searchValue:'',
-        searchValueChanged: function (){
-          console.log('search value changed', arguments);
-        }
+        selContact:{}
       });
     })();
   </script>
