@@ -53,7 +53,7 @@
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
-        <contacts-list flex id="contactList"></contacts-list>
+        <contacts-list flex id="contactList" selContact="{{selectedContact}}"></contacts-list>
         <auto-scroller></auto-scroller>
         </div>
       </nav>
@@ -63,28 +63,38 @@
         <div layout horizontal flex>
           <span class="page-title" flex>{{pageTitle}}</span>
         </div>
-        <template if="{{selectedPage === 0}}">
+        <!-- Which button displayed depends on selected page. -->
+        <template if="{{selectedPage === 'scheduledCalls'}}">
           <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
         </template>
-        <template if="{{selectedPage === 1}}">
-          <paper-fab icon="arrow-back" class="newContact accent-color" on-tap="{{backToStart}}"></paper-fab>
+        <template if="{{selectedPage !== 'scheduledCalls'}}">
+          <paper-fab icon="arrow-back" class="newContact accent-color" on-tap="{{backToScheduledCalls}}"></paper-fab>
         </template>
       </core-toolbar>
 
       <!-- Main page Content here -->
-      <core-animated-pages selected="{{selectedPage}}" transitions="slide-from-right" layout vertical fit>
+      <core-animated-pages valueattr="id" selected="{{selectedPage}}" transitions="slide-from-right" layout vertical fit>
         <scheduled-call id="scheduledCalls" selContact="{{selectedContact}}"></scheduled-call>
-        <contact-card contact="{{selectedContact}}"></contact-card>
+        <contact-card id= "contactCard" contact="{{selectedContact}}"></contact-card>
+        <new-contact id="newContact"></new-contact>
       </core-animated-pages>
     </core-scaffold>
   </template>
   <script>
     (function () {
       Polymer({
-        backToStart:function (e){
-          this.selectedPage = 0;
+        backToScheduledCalls:function (e){
+          this.selectedPage = 'scheduledCalls';
           //DO NOT CHANGE selectedContact as this will make the page cycle again.
           this.pageTitle = 'Today...'
+        },
+        /**
+         * @param {String} newPage The id of the page to change to.
+         * @param {String} title The string to be used as the title for the new Page.
+         */
+        changePage: function(newPage, title){
+          this.selectedPage = newPage;
+          this.pageTitle = title;
         },
         // define element prototype here
         contacts:null,
@@ -94,20 +104,14 @@
         },
         newContact:function(e, detail, target){
           console.log('making new contact: ', arguments)
+          this.changePage('newContact', 'New Contact')
         },
         selectedContact:{},
-        selectedPage:0,
+        selectedPage:'scheduledCalls',
         pageTitle: 'Today...',
-        selectedPageChanged: function(ov, nv){
-          console.log('selectedPage changed', arguments);
-        },
         selectedContactChanged: function(ov, nv){
-          console.log('selected contact changed', arguments);
-          //Change selected page to contact card
-          this.selectedPage = 1;
-          //Set the contact name as the page title
-          this.pageTitle = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
-          //Add a back button someplace to go back to today's contacts.
+          var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
+          this.changePage('contactCard',title)
         }
 
       });
