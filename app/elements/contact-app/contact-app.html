@@ -47,7 +47,7 @@
 
     </style>
     <core-scaffold>
-      <!-- Left Side (Collapsing) -->
+      <!-- Left Side Drawer-->
       <nav>
         <core-toolbar layout horizonal>
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
@@ -84,11 +84,11 @@
     (function () {
       Polymer({
         backToScheduledCalls:function (e){
-          this.selectedPage = 'scheduledCalls';
-          //DO NOT CHANGE selectedContact as this will make the page cycle again.
-          this.pageTitle = 'Today...'
+          this.changePage('scheduledCalls', 'Today...');
         },
         /**
+         * Private method used to set a new page and page title.
+         * newPage param must match ID of page you want to go to.
          * @param {String} newPage The id of the page to change to.
          * @param {String} title The string to be used as the title for the new Page.
          */
@@ -99,14 +99,15 @@
         // define element prototype here
         contacts:null,
         gotData: function(evt, detail){
-          console.log('got test data:', arguments);
           this.contacts = detail.response.contacts;
         },
+        //Handler to go to the new contact page.
         newContact:function(e, detail, target){
-          console.log('making new contact: ', arguments)
           this.changePage('newContact', 'New Contact')
         },
+        //Stores the currently selected contact
         selectedContact:{},
+        //Stores the currently selected page.  This is wired
         selectedPage:'scheduledCalls',
         pageTitle: 'Today...',
         selectedContactChanged: function(ov, nv){

@@ -36,7 +36,6 @@
         calls:[],
         // define element prototype here
         gotTodaysCalls: function(e, detail){
-          console.log('got todays calls', detail.response);
           this.calls = detail.response.contacts;
         },
         searchValue:'',

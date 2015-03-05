@@ -33,18 +33,12 @@
         // define element prototype here
         allContacts:[],
         selectContact: function(e, detail, elem){
-          console.info('Contact selected: ', elem.templateInstance_.model.contact);
           this.selContact = elem.templateInstance_.model.contact;
         },
         gotContacts:function(e, detail){
-          console.log('got all contacts:', detail.response.contacts.length);
           this.allContacts = detail.response.contacts;
         },
-        //This is tied to the core list to track wich contact is selected.
-        selContact:{},
-        selContactChanged: function(){
-          console.log('selContact changed', arguments);
-        }
+        selContact:{}
       });
     })();
   </script>
