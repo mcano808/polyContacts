@@ -1,14 +1,82 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
 
 <polymer-element name="new-contact" attributes="">
   <template>
     <link rel="stylesheet" href="new-contact.css">
-    <h1> I am a new contact!!</h1>
+    <div layout horizontal>
+      <div flex>
+        <paper-input-decorator label="First" floatingLabel error="Required" autoValidate>
+          <input is="core-input" required value="{{newContact.name.first}}">
+        </paper-input-decorator>
+      </div>
+      <div flex>
+        <paper-input-decorator label="Last" floatingLabel error="Required" autoValidate>
+          <input is="core-input" required value="{{newContact.name.last}}">
+        </paper-input-decorator>
+      </div>
+    </div>
+    <paper-input-decorator label="Phone" floatingLabel error="Required" autoValidate>
+      <input is="core-input" required value="{{newContact.contact.phone}}">
+    </paper-input-decorator>
+    <paper-input-decorator label="Email" floatingLabel error="Required" autoValidate>
+      <input is="core-input" required value="{{newContact.contact.email}}">
+    </paper-input-decorator>
+    <div layout horizontal>
+      <div>
+        Status:{{newContact.status}}
+      </div>
+      <div flex>
+        <paper-slider pin snaps max="4" step="1" id="status" style="width:100%"></paper-slider>
+      </div>
+    </div>
   </template>
   <script>
     (function () {
       Polymer({
+        ready: function(){
+          var status = this.$.status,
+          contactStatus = this.newContact.status,
+          that = this;
+
+          status.addEventListener('core-change', function(e){
+            console.info('core-change', e);
+            //Set the word value based on the step value.
+            switch (status.value){
+              case 0:
+                that.newContact.status = 'Freezing';
+                break;
+              case 1:
+                that.newContact.status = 'Cold';
+                break;
+              case 2:
+                that.newContact.status = 'Neutral';
+                break;
+              case 3:
+                that.newContact.status = 'Warm';
+                break;
+              case 4:
+                that.newContact.status = 'Hot';
+                break;
+            }
+          });
+        },
         // define element prototype here
+        newContact:{
+          name:{
+            first:'',
+            last:''
+          },
+          contact:{
+            phone:'',
+            email:'',
+            cell:''
+          },
+          status:'Cold'
+        },
+        //Handler for when slide valu changes.
+        setStatus: function(){}
       });
     })();
   </script>
