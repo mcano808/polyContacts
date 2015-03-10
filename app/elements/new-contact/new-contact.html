@@ -5,30 +5,32 @@
 <polymer-element name="new-contact" attributes="">
   <template>
     <link rel="stylesheet" href="new-contact.css">
-    <div layout horizontal>
-      <div flex>
-        <paper-input-decorator label="First" floatingLabel error="Required" autoValidate>
-          <input is="core-input" required value="{{newContact.name.first}}">
-        </paper-input-decorator>
+    <div id="new-contact-card" layout vertical fit>
+      <div layout horizontal>
+        <div flex>
+          <paper-input-decorator label="First" floatingLabel error="Required" autoValidate>
+            <input is="core-input" required value="{{newContact.name.first}}">
+          </paper-input-decorator>
+        </div>
+        <div flex>
+          <paper-input-decorator label="Last" floatingLabel error="Required" autoValidate>
+            <input is="core-input" required value="{{newContact.name.last}}">
+          </paper-input-decorator>
+        </div>
       </div>
-      <div flex>
-        <paper-input-decorator label="Last" floatingLabel error="Required" autoValidate>
-          <input is="core-input" required value="{{newContact.name.last}}">
-        </paper-input-decorator>
-      </div>
-    </div>
-    <paper-input-decorator label="Phone" floatingLabel error="Required" autoValidate>
-      <input is="core-input" required value="{{newContact.contact.phone}}">
-    </paper-input-decorator>
-    <paper-input-decorator label="Email" floatingLabel error="Required" autoValidate>
-      <input is="core-input" required value="{{newContact.contact.email}}">
-    </paper-input-decorator>
-    <div layout horizontal>
-      <div>
-        Status:{{newContact.status}}
-      </div>
-      <div flex>
-        <paper-slider pin snaps max="4" step="1" id="status" style="width:100%"></paper-slider>
+      <paper-input-decorator label="Phone" floatingLabel error="Required" autoValidate>
+        <input is="core-input" required value="{{newContact.contact.phone}}">
+      </paper-input-decorator>
+      <paper-input-decorator label="Email" floatingLabel error="Required" autoValidate>
+        <input is="core-input" required value="{{newContact.contact.email}}">
+      </paper-input-decorator>
+      <div layout horizontal>
+        <div>
+          Status:{{newContact.status}}
+        </div>
+        <div flex>
+          <paper-slider pin snaps max="4" step="1" id="status" style="width:100%"></paper-slider>
+        </div>
       </div>
     </div>
   </template>
@@ -39,10 +41,11 @@
           var status = this.$.status,
           contactStatus = this.newContact.status,
           that = this;
-
+          // When the slide changes we take the value and convert it to a word with meaning.
           status.addEventListener('core-change', function(e){
             console.info('core-change', e);
             //Set the word value based on the step value.
+            //TODO change the color of the slider bar based on case below.
             switch (status.value){
               case 0:
                 that.newContact.status = 'Freezing';
