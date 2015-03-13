@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 
 <polymer-element name="new-contact" attributes="">
   <template>
@@ -25,12 +26,19 @@
         <input is="core-input" required value="{{newContact.contact.email}}">
       </paper-input-decorator>
       <div layout horizontal>
-        <div>
+        <div class="contact-status">
           Status:{{newContact.status}}
         </div>
         <div flex>
           <paper-slider pin snaps max="4" step="1" id="status" style="width:100%"></paper-slider>
         </div>
+      </div>
+      <div flex>
+        <paper-input-decorator label="Notes..." floatingLabel>
+          <paper-autogrow-textarea>
+            <textarea value="{{newContact.notes}}" style="width:100%"></textarea>
+          </paper-autogrow-textarea>
+        </paper-input-decorator>
       </div>
     </div>
   </template>
@@ -65,21 +73,35 @@
             }
           });
         },
-        // define element prototype here
-        newContact:{
-          name:{
-            first:'',
-            last:''
+        publish:{
+          newContact:{
+            name:{
+              first:'',
+              last:''
+            },
+            contact:{
+              phone:'',
+              email:'',
+              cell:''
+            },
+            status:'Cold'
           },
-          contact:{
-            phone:'',
-            email:'',
-            cell:''
-          },
-          status:'Cold'
+          clear: function(){
+            this.newContact = {
+              name:{
+                first:'',
+                last:''
+              },
+              contact:{
+                phone:'',
+                email:'',
+                cell:''
+              },
+              status:'Cold'
+            }
+          }
         },
-        //Handler for when slide valu changes.
-        setStatus: function(){}
+
       });
     })();
   </script>

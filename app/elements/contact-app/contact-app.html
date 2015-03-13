@@ -20,8 +20,12 @@
       :host {
         display: block;
       }
-
-      .newContact{
+      .back{
+        position: absolute!important;
+        left:-40px;
+        z-index: 10;
+      }
+      .current-action{
         position: absolute!important;
         bottom:-10px;
         right:-20px;
@@ -61,22 +65,26 @@
       <!-- Right side and main content -->
       <core-toolbar tool flex>
         <div layout horizontal flex>
+          <template if="{{selectedPage !== 'scheduledCalls'}}">
+            <core-icon icon="arrow-back"  on-tap="{{backToScheduledCalls}}"></core-icon>
+          </template>
           <span class="page-title" flex>{{pageTitle}}</span>
         </div>
         <!-- Which button displayed depends on selected page. -->
         <template if="{{selectedPage === 'scheduledCalls'}}">
-          <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
+          <paper-fab icon="account-circle" class="current-action accent-color" on-tap="{{newContact}}"></paper-fab>
         </template>
-        <template if="{{selectedPage !== 'scheduledCalls'}}">
-          <paper-fab icon="arrow-back" class="newContact accent-color" on-tap="{{backToScheduledCalls}}"></paper-fab>
+        <template if="{{selectedPage === 'newContact'}}">
+          <paper-fab class="current-action accent-color" icon="add-circle-outline" on-tap="{{addNewContact}}"></paper-fab>
         </template>
+
       </core-toolbar>
 
       <!-- Main page Content here -->
       <core-animated-pages valueattr="id" selected="{{selectedPage}}" transitions="slide-from-right" layout vertical fit>
         <scheduled-call id="scheduledCalls" selContact="{{selectedContact}}"></scheduled-call>
         <contact-card id= "contactCard" contact="{{selectedContact}}"></contact-card>
-        <new-contact id="newContact"></new-contact>
+        <new-contact id="newContact" contact="{{newContactRecord}}"></new-contact>
       </core-animated-pages>
     </core-scaffold>
   </template>
@@ -97,7 +105,7 @@
           this.pageTitle = title;
         },
         // define element prototype here
-        contacts:null,
+        contacts:[],
         gotData: function(evt, detail){
           this.contacts = detail.response.contacts;
         },
@@ -105,6 +113,17 @@
         newContact:function(e, detail, target){
           this.changePage('newContact', 'New Contact')
         },
+        addNewContact:function(){
+          console.log('adding the new contact', this.newContactRecord);
+          //Add the new contact to the list.  TODO- this will be a service call later.
+          this.contacts.push(this.newContactRecord);
+          //Call the clear method to clear the fields.
+          this.$.newContact.reset();
+
+          //Change the page to scheduledCalls
+          this.changePage('scheduledCalls', 'Today...');
+        },
+
         //Stores the currently selected contact
         selectedContact:{},
         //Stores the currently selected page.  This is wired
