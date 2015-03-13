@@ -88,11 +88,28 @@
           status:'Freezing',
           notes:''
         },
+        clearContact: function(){
+          this.newContact = {
+            name:{
+              first:'',
+              last:''
+            },
+            contact:{
+              phone:'',
+              email:'',
+              cell:''
+            },
+            contacts:[],
+            status:'Freezing',
+            notes:''
+          };
+        },
         addNewContact:function(){
+          //Make a copy of the contact object so we aren't passing refferences.
+          var toReturn = JSON.parse(JSON.stringify(this.newContact));;
           console.info('adding new contact: ', this.newContact);
-          //TODO function should have some kind of data check here.
-          //this.fire('newcontactadded', this.newContact);
-          return this.newContact;
+          this.clearContact();
+          return toReturn;
         }
       });
     })();

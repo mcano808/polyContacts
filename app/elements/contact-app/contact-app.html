@@ -120,12 +120,6 @@
         newContact:function(e, detail, target){
           this.changePage('newContact', 'New Contact')
         },
-        ready:function(){
-          //Add event listener for new contact add
-          this.$.newContact.addEventListener('newcontactadded', function(e, detail, target){
-            console.log('got new contact', arguments);
-          });
-        },
         //Stores the currently selected contact
         selectedContact:{},
         //Stores the currently selected page.  This is wired
