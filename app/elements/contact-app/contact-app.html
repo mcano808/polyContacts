@@ -43,6 +43,7 @@
       }
       .page-title{
         font-size: 1.5em;
+        text-align: center;
       }
 
     </style>
@@ -67,13 +68,16 @@
       <!-- Right side and main content -->
       <core-toolbar tool flex>
         <div layout horizontal flex>
-          <span class="page-title" flex>{{pageTitle}}</span>
+          <template if="{{selectedPage !== 'scheduledCalls'}}">
+            <core-icon icon="arrow-back" on-tap="{{backToScheduledCalls}}"></core-icon>
+          </template>
+          <div class="page-title" flex>{{pageTitle}}</div>
         </div>
         <!-- Which button displayed depends on selected page. -->
         <template if="{{selectedPage === 'scheduledCalls'}}">
           <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
         </template>
-        <template if="{{selectedPage !== 'scheduledCalls'}}">
+        <template if="{{selectedPage === 'newContact'}}">
           <paper-fab icon="add" class="newContact accent-color" on-tap="{{fireNewContact}}"></paper-fab>
         </template>
       </core-toolbar>
