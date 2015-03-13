@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
 
@@ -31,6 +32,13 @@
         <div flex>
           <paper-slider pin snaps max="4" step="1" id="status" style="width:100%"></paper-slider>
         </div>
+      </div>
+      <div flex>
+        <paper-input-decorator label="Notes..." floatingLabel>
+          <paper-autogrow-textarea>
+            <textarea style="width:100%" value="newContact.notes"></textarea>
+          </paper-autogrow-textarea>
+        </paper-input-decorator>
       </div>
     </div>
   </template>
@@ -76,7 +84,9 @@
             email:'',
             cell:''
           },
-          status:'Cold'
+          contacts:[],
+          status:'Cold',
+          notes:''
         },
         //Handler for when slide valu changes.
         setStatus: function(){}
