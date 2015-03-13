@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
-<polymer-element name="contacts-list" attributes="selContact">
+<polymer-element name="contacts-list" attributes="selContact allContacts">
   <template>
     <link rel="stylesheet" href="contacts-list.css">
     <link rel="stylesheet" href="../../styles/palette.css">
@@ -15,12 +15,7 @@
       }
 
     </style>
-    <!-- Get the mock data.  TODO this needs to hit a aservice to get 'all' contacts. -->
-    <core-ajax auto
-              url="../../testData.json"
-              handleAs="json"
-              on-core-response="{{gotContacts}}">
-    </core-ajax>
+
     <ul>
       <template repeat="{{contact in allContacts}}">
         <li class="contact secondary-text-color" on-tap="{{selectContact}}">{{contact.name.last}}, {{contact.name.first}} </li>
@@ -31,14 +26,13 @@
     (function () {
       Polymer({
         // define element prototype here
-        allContacts:[],
+        publish:{
+          allContacts:[],
+          selContact:{}
+        },
         selectContact: function(e, detail, elem){
           this.selContact = elem.templateInstance_.model.contact;
-        },
-        gotContacts:function(e, detail){
-          this.allContacts = detail.response.contacts;
-        },
-        selContact:{}
+        }
       });
     })();
   </script>

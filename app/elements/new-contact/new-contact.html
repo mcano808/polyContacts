@@ -36,7 +36,7 @@
       <div flex>
         <paper-input-decorator label="Notes..." floatingLabel>
           <paper-autogrow-textarea>
-            <textarea style="width:100%" value="newContact.notes"></textarea>
+            <textarea style="width:100%" value="{{newContact.notes}}"></textarea>
           </paper-autogrow-textarea>
         </paper-input-decorator>
       </div>
@@ -85,11 +85,15 @@
             cell:''
           },
           contacts:[],
-          status:'Cold',
+          status:'Freezing',
           notes:''
         },
-        //Handler for when slide valu changes.
-        setStatus: function(){}
+        addNewContact:function(){
+          console.info('adding new contact: ', this.newContact);
+          //TODO function should have some kind of data check here.
+          //this.fire('newcontactadded', this.newContact);
+          return this.newContact;
+        }
       });
     })();
   </script>

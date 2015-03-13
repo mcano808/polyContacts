@@ -46,6 +46,12 @@
       }
 
     </style>
+        <!-- Get the mock data.  TODO this needs to hit a aservice to get 'all' contacts. -->
+    <core-ajax auto
+              url="../../testData.json"
+              handleAs="json"
+              on-core-response="{{gotContacts}}">
+    </core-ajax>
     <core-scaffold>
       <!-- Left Side Drawer-->
       <nav>
@@ -53,7 +59,7 @@
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
-        <contacts-list flex id="contactList" selContact="{{selectedContact}}"></contacts-list>
+        <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts}}"></contacts-list>
         <auto-scroller></auto-scroller>
         </div>
       </nav>
@@ -68,7 +74,7 @@
           <paper-fab icon="account-circle" class="newContact accent-color" on-tap="{{newContact}}"></paper-fab>
         </template>
         <template if="{{selectedPage !== 'scheduledCalls'}}">
-          <paper-fab icon="arrow-back" class="newContact accent-color" on-tap="{{backToScheduledCalls}}"></paper-fab>
+          <paper-fab icon="add" class="newContact accent-color" on-tap="{{fireNewContact}}"></paper-fab>
         </template>
       </core-toolbar>
 
@@ -83,6 +89,9 @@
   <script>
     (function () {
       Polymer({
+        gotContacts:function(e, detail){
+          this.contacts = detail.response.contacts;
+        },
         backToScheduledCalls:function (e){
           this.changePage('scheduledCalls', 'Today...');
         },
@@ -97,13 +106,25 @@
           this.pageTitle = title;
         },
         // define element prototype here
-        contacts:null,
+        contacts:[],
+        fireNewContact: function(){
+          this.contacts.push(this.$.newContact.addNewContact());
+          //Clear data
+          //this.$.newContact.clear();
+          this.changePage('scheduledCalls', 'Today...');
+        },
         gotData: function(evt, detail){
           this.contacts = detail.response.contacts;
         },
         //Handler to go to the new contact page.
         newContact:function(e, detail, target){
           this.changePage('newContact', 'New Contact')
+        },
+        ready:function(){
+          //Add event listener for new contact add
+          this.$.newContact.addEventListener('newcontactadded', function(e, detail, target){
+            console.log('got new contact', arguments);
+          });
         },
         //Stores the currently selected contact
         selectedContact:{},
