@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="filter-on" attributes="">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        // define element prototype here
+        publish:{
+          in:[],
+          out:[],
+          filterOn:''
+        },
+        filterOnChanged: function(oFilter, nFilter){
+          if(nFilter.length < 1){
+            return this.in;
+          }else{
+            this.out = in.filter(function(elem, idx, list){
+              
+            });
+          }
+        }
+      });
+    })();
+  </script>
+</polymer-element>

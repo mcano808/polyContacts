@@ -15,10 +15,10 @@
                on-core-response="{{gotTodaysCalls}}"></core-ajax>
     <div class="container" main layout vertical >
       <div>
-        <yoso-searchfield hint="Find me..." text={{searchValue}} ></yoso-searchfield>
+        <yoso-searchfield hint="Find me..." text="{{searchValue}}" ></yoso-searchfield>
       </div>
       <div flex>
-        <template repeat="{{call in calls}}">
+        <template repeat="{{call in calls | filterName(searchValue)}}">
           <contact-chip contact="{{call}}"></contact-chip>
         </template>
       </div>
@@ -34,6 +34,24 @@
           })
         },
         calls:[],
+        filterName:function(calls, filterBy){
+          if(filterBy.length < 1){
+            return calls;
+          }
+          if(calls.length > 0){
+            return calls.filter(function(call){
+              var pat = new RegExp(filterBy, "i"),
+                inLast = pat.test(call.name.last),
+                inFirst = pat.test(call.name.first);
+                if(inFirst || inLast){
+                  return true
+                }else{
+                  return false;
+                }
+            });
+          }
+
+        },
         // define element prototype here
         gotTodaysCalls: function(e, detail){
           this.calls = detail.response.contacts;
