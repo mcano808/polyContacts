@@ -16,12 +16,12 @@
       "state":"Colorado",
       "zip":"80016"
     },
-    "contact":{
-      "cell":"1234567890",
-      "home":"1234567890",
-      "email":"me@you.com",
-      "fax":"1234567890"
-    },
+    "contact":[
+      ["cell","(123)456-7890"],
+      ["home","(123)456-7890"],
+      ["email","me@you.com"],
+      ["fax","(123)456-7890"]
+    ],
     "social":{
       "twitter":"@mikeTwitter",
       "facebook":"myFacebookpage.com",
@@ -29,27 +29,27 @@
     },
     "contacts":[{
       "contactId":1,
-      "curDate": "",
-      "fUpDtg": "",
-      "notes":"Some notes go here",
-      "status":"hot"
+      "curDate": "Oct 25, 1977",
+      "fUpDtg": "Nov 10, 1978",
+      "notes":"He was just born. Not ready to have this stuff yet.  Give him some time and call back.",
+      "status":"freezing"
     },{
       "contactId":2,
-      "curDate": "",
-      "fUpDtg": "",
-      "notes":"Some notes go here",
-      "status":"hot"
+      "curDate": "Nov 10, 1978",
+      "fUpDtg": "Nov 10, 1990",
+      "notes":"Still too young but he thiks when he gets older he'll be interested.  Call back in some time.",
+      "status":"neutral"
     },{
       "contactId":3,
-      "curDate": "",
-      "fUpDtg": "",
-      "notes":"Some notes go here",
+      "curDate": "Nov 11, 1990",
+      "fUpDtg": "Nov 28, 1990",
+      "notes":"He thinks he might be ready.  Gave him website info and he's going to check it out.  Call to follow up and answer any questions.",
       "status":"hot"
     },{
       "contactId":4,
-      "curDate":"",
-      "fUpDtg": "",
-      "notes":"Some notes go here",
+      "curDate":"Nov 28, 1990",
+      "fUpDtg": "Dec 25, 1990",
+      "notes":"He's going to sign up tonight.  Follo up after he gets it to make sure he can handle the cleanse.",
       "status":"hot"
     }]
   },{
@@ -70,12 +70,12 @@
       "state":"Colorado",
       "zip":"80016"
     },
-    "contact":{
-      "cell":"1234567890",
-      "home":"1234567890",
-      "email":"me@you.com",
-      "fax":"1234567890"
-    },
+    "contact":[
+      ["cell","1234567890"],
+      ["home","1234567890"],
+      ["email","me@you.com"],
+      ["fax","1234567890"]
+    ],
     "socail":{
       "twitter":"@mikeTwitter",
       "facebook":"myFacebookpage.com",
@@ -124,12 +124,12 @@
       "state":"Colorado",
       "zip":"80016"
     },
-    "contact":{
-      "cell":"8082204994",
-      "home":"1234567890",
-      "email":"me@you.com",
-      "fax":"1234567890"
-    },
+    "contact":[
+      ["cell","8082204994"],
+      ["home","1234567890"],
+      ["email","me@you.com"],
+      ["fax","1234567890"]
+    ],
     "socail":{
       "twitter":"@snifferTwitter",
       "facebook":"myFacebookpage.com",
@@ -178,12 +178,12 @@
         "state":"Colorado",
         "zip":"80016"
       },
-      "contact":{
-        "cell":"1234567890",
-        "home":"1234567890",
-        "email":"me@you.com",
-        "fax":"1234567890"
-      },
+      "contact":[
+        ["cell","1234567890"],
+        ["home","1234567890"],
+        ["email","me@you.com"],
+        ["fax","1234567890"]
+      ],
       "social":{
         "twitter":"@mikeTwitter",
         "facebook":"myFacebookpage.com",
@@ -219,7 +219,7 @@
         "sold":false,
         "active":true,
         "dateEntered":"Some date",
-      "addedToFacebook":false,
+        "addedToFacebook":false,
         "name":{
           "first": "Arie",
           "last":"Cano",
@@ -232,12 +232,12 @@
           "state":"Colorado",
           "zip":"80016"
         },
-        "contact":{
-          "cell":"1234567890",
-          "home":"1234567890",
-          "email":"me@you.com",
-          "fax":"1234567890"
-        },
+        "contact":[
+          ["cell","1234567890"],
+          ["home","1234567890"],
+          ["email","me@you.com"],
+          ["fax","1234567890"]
+        ],
         "social":{
           "twitter":"@mikeTwitter",
           "facebook":"myFacebookpage.com",

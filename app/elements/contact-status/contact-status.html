@@ -1,26 +1,33 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="contact-status" attributes="">
+<polymer-element name="contact-status" attributes="radius status">
   <template>
     <style>
       :host {
         display: block;
+        margin: 4px 8px;
       }
-      .neutral{
-        fill:#eee;
-      }
-      .cold{
-        fill:#03A9F4 ;
-      }
-      .warm{
-        fill:#FFC107;
-      }
-      .hot{
+    /*
+        Style for icons based on status
+    */
+    .hot{
         fill:#F44336;
-      }
+    }
+    .warm{
+        fill: #FFEB3B;
+    }
+    .neutral{
+        fill: #9E9E9E;
+    }
+    .cold{
+        fill: #03A9F4;
+    }
+    .freezing{
+        fill: #3F51B5;
+    }
     </style>
-    <svg height="{{radius}}" width="{{radius * 2}}">
-      <circle r="{{radius}}" cx="{{radius}}" cy="{{radius / 2}}" class="{{status}}"/>
+    <svg height="{{radius * 2}}" width="{{radius * 2}}">
+      <circle r="{{radius}}" cx="{{radius}}" cy="{{radius}}" class="{{status}}"/>
     </svg>
   </template>
   <script>
@@ -29,7 +36,7 @@
         // define element prototype here
         publish:{
           radius: 16,
-          status:'neutral'
+          status:''
         }
       });
     })();

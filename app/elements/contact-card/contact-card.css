@@ -1,3 +1,45 @@
 :host {
   display: block;
 }
+
+.header{}
+
+.phone-number{
+  color: dimgrey;
+  font-size: 1.15em;
+  padding-left: 24px;
+}
+.page-wrapper{
+  height:100%;
+}
+paper-icon-button.big::shadow #icon{
+  width: 48px;
+  height:48px;
+}
+paper-icon-button.med::shadow #icon{
+  width: 32px;
+  height:32px;
+}
+contact-status{
+  margin-left:16px;
+  margin-top: 8px;
+}
+.note-control{
+  padding: 0 16px;
+}
+
+.bottom-toolbar{
+  bottom: 0;
+  left: 0;
+  width: 100%
+}
+
+/*Styleing for the note section of contact card*/
+
+.cur-note-date{
+  text-align: center;
+}
+.note{
+  padding:8px 16px;
+  overflow: auto;
+}

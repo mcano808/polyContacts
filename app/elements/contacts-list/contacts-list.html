@@ -17,7 +17,7 @@
     </style>
 
     <ul>
-      <template repeat="{{contact in allContacts}}">
+      <template repeat="{{contact in allContacts | filterContacts(filterOn)}}">
         <li class="contact secondary-text-color" on-tap="{{selectContact}}">{{contact.name.last}}, {{contact.name.first}} </li>
       </template>
     </ul>
@@ -26,8 +26,22 @@
     (function () {
       Polymer({
         // define element prototype here
+        filterContacts: function(contacts, filterOn){
+          return contacts.filter(function(contact){
+            var pat = new RegExp(filterOn,"i"),
+              inLast = pat.test(contact.name.last),
+              inFirst = pat.test(contact.name.first);
+              if(inFirst || inLast){
+                return true;
+              }else{
+                console.log('failed the filter');
+                return false;
+              }
+          });
+        },
         publish:{
           allContacts:[],
+          filterOn:'',
           selContact:{}
         },
         selectContact: function(e, detail, elem){

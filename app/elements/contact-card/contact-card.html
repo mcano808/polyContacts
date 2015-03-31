@@ -1,8 +1,44 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
-<polymer-element name="contact-card">
+<link rel="import" href="../../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../contact-status/contact-status.html">
+<polymer-element name="contact-card" atttributes="selectedContact">
   <template>
     <link rel="stylesheet" href="contact-card.css">
+    <div class="page-wrapper" layout vertical>
+      <!-- header section -->
+      <div class="header" layout horizontal center>
+        <div>
+          <contact-status radius="30" status="{{currentStatus}}"> </contact-status>
+        </div>
+        <div flex class="phone-number">
+          #{{selectedContact.contact.cell}}
+        </div>
+
+      </div>
+      <!-- Controls-->
+      <div class="note-control" layout horizontal center>
+        <paper-icon-button icon="expand-less" class="med" on-tap="{{nextNote}}"></paper-icon-button>
+        <!--paper-button  on-tap="{{nextNote}}">Newer</paper-button-->
+        <div class="cur-note-date" flex>{{currentContactNote.curDate || 'No Date'}} | {{currentNoteIdx + 1 }}/{{contactNotes.length}}</div>
+        <paper-icon-button icon="expand-more" class="med" on-tap="{{prevNote}}"></paper-icon-button>
+        <!--paper-button  on-tap="{{prevNote}}">Older</paer-button-->
+      </div>
+      <!--    Repeating section for contacts-->
+      <div flex class="note">
+        {{currentContactNote.notes}}
+      </div>
+      <!-- Bottom toolbar section -->
+      <div class="bottom-toolbar">
+        <div layout horizontal around-justified>
+          <paper-icon-button icon="send" class="big" on-tap="{{sendEmail}}"></paper-icon-button>
+          <paper-icon-button icon="add-circle" class="big" on-tap="{{addNewContact}}"></paper-icon-button>
+          <paper-icon-button icon="perm-phone-msg" class="big" on-tap="{{callContact}}"></paper-icon-button>
+        </div>
+      </div>
+    </div>
 
   </template>
   <script>
@@ -11,6 +47,38 @@
         // define element prototype here
         publish:{
           selectedContact:{}
+        },
+        addNewContact:function(){
+          console.info('Adding a new time I contacted this guy:');
+        },
+        callContact:function(){
+          console.info('Making a call to the contact: ', this.selectedContact.contact.cell);
+        },
+        contactNotes:null,
+        currentNoteIdx:0,
+        computed:{
+          currentContactNote:'contactNotes[currentNoteIdx]'
+        },
+        currentStatus:'freezing',
+        selectedContactChanged: function(oV, nV){
+          console.log('selected contact changed on contact card:', nV);
+          //Update the currentStatus.
+          this.currentStatus = (this.selectedContact.contacts)? this.selectedContact.contacts[0].status : 'cold';
+          //Update notes.
+          // TODO- Right now I show the array in reverse order.  Later this needs to be a filter on the view that sorts by date in each contact
+          this.contactNotes = (this.selectedContact.contacts)? this.selectedContact.contacts.reverse() : [];
+        },
+        sendEmail:function(){
+          console.info('sending an email: ', this.selectedContact.contact.email);
+        },
+        nextNote:function(e){
+          //Goes to the next one up if there is one.  if at top then does nothing.
+          if(this.currentNoteIdx > 0) this.currentNoteIdx --;
+        },
+        prevNote:function(e){
+          var noteCnt = (this.contactNotes.length) -1;
+          //Goes to the next note down if there is one
+          if(this.currentNoteIdx < noteCnt) this.currentNoteIdx ++;
         }
       });
     })();

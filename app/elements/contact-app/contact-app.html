@@ -60,7 +60,7 @@
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
-        <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts}}"></contacts-list>
+        <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts}}" filterOn="{{searchValue}}"></contacts-list>
         <auto-scroller></auto-scroller>
         </div>
       </nav>
@@ -84,8 +84,9 @@
 
       <!-- Main page Content here -->
       <core-animated-pages valueattr="id" selected="{{selectedPage}}" transitions="slide-from-right" layout vertical fit>
+        <!-- Pages -->
         <scheduled-call id="scheduledCalls" selContact="{{selectedContact}}"></scheduled-call>
-        <contact-card id= "contactCard" contact="{{selectedContact}}"></contact-card>
+        <contact-card id= "contactCard" selectedContact="{{selectedContact}}"></contact-card>
         <new-contact id="newContact"></new-contact>
       </core-animated-pages>
     </core-scaffold>
@@ -131,7 +132,7 @@
         pageTitle: 'Today...',
         selectedContactChanged: function(ov, nv){
           var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
-          this.changePage('contactCard',title)
+          this.changePage('contactCard',title);
         }
 
       });
