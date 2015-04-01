@@ -60,8 +60,8 @@
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
-        <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts}}" filterOn="{{searchValue}}"></contacts-list>
-        <auto-scroller></auto-scroller>
+        <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts | limitToLetter(selectedLetter)}}" filterOn="{{searchValue}}"></contacts-list>
+        <auto-scroller selectedLetter="{{selectedLetter}}"></auto-scroller>
         </div>
       </nav>
 
@@ -121,6 +121,24 @@
         gotData: function(evt, detail){
           this.contacts = detail.response.contacts;
         },
+        limitToLetter: function(contacts, letter){
+          console.log('limiting to letter');
+          //If no letter then don't do any filtering.
+          if(letter === ''){
+            return contacts;
+          }else{
+
+              return contacts.filter(function(contact){
+                //test first letter of last name
+                var lastBeginsWith = contact.name.last.slice(0,1).toLowerCase();
+                if(lastBeginsWith === letter){
+                  return true;
+                }else{
+                  return false;
+                }
+              });
+          }
+        },
         //Handler to go to the new contact page.
         newContact:function(e, detail, target){
           this.changePage('newContact', 'New Contact')
@@ -133,7 +151,9 @@
         selectedContactChanged: function(ov, nv){
           var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
           this.changePage('contactCard',title);
-        }
+        },
+        selectedLetter:''
+
 
       });
     })();
