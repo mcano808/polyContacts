@@ -60,8 +60,7 @@
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
         <div layout horizontal>
-        <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts | limitToLetter(selectedLetter)}}" filterOn="{{searchValue}}"></contacts-list>
-        <auto-scroller selectedLetter="{{selectedLetter}}"></auto-scroller>
+          <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts | limitToLetter(selectedLetter)}}" filterOn="{{searchValue}}"></contacts-list>
         </div>
       </nav>
 
