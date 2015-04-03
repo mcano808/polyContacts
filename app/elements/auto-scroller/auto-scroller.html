@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="auto-scroller.css">
     <div id="scroll_container" layout vertcal justified>
       <template repeat="{{label in scrollLabels}}">
-        <div class="scroll_label" on-click="{{labelSelected}}" letter="{{label}}">{{label}}</div>
+        <div class="{{ {scroll_label: true, selected:label === selectedLetter} | tokenList}}" on-click="{{labelSelected}}" letter="{{label}}">{{label}}</div>
       </template>
 
     </div>
@@ -15,20 +15,27 @@
     (function () {
       Polymer({
         // define element prototype here
-        /**
-          * CUSTOM EVENT
-          * Event name: letterselected
-          */
         labelSelected:function(e, detail, target){
           console.log('made a selection', target.attributes.letter.value);
-          var selected = null;
-          if(target.attributes.letter !== undefined){
-            selected = target.attributes.letter;
+          var selected = target.attributes.letter;
+
+          if( selected!== undefined){
+            if(selected.value === this.selectedLetter){
+              //We selected the same letter and want to clear the filter
+              this.selectedLetter = '';
+            }else{
+              //We have selected a new letter.
+              this.selectedLetter = target.attributes.letter.value;
+            }
           }
-          this.fire('letterselected', selected);
-          this.selectedLetter = selected;
         },
-        selectedLetter:'',
+        publish:{
+          selectedLetter:''
+        },
+        selectedLetterChanged: function(oLetter, nLetter){
+          //If the new letter
+          console.log('selectedLetter changed: ', arguments);
+        },
         scrollLabels:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
       });
     })();

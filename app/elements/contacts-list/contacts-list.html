@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../auto-scroller/auto-scroller.html">
 
 <polymer-element name="contacts-list" attributes="selContact allContacts">
   <template>
@@ -14,19 +15,36 @@
         padding:6px;
       }
 
-    </style>
 
-    <ul>
-      <template repeat="{{contact in allContacts | filterContacts(filterOn)}}">
-        <li class="contact secondary-text-color" on-tap="{{selectContact}}">{{contact.name.last}}, {{contact.name.first}} </li>
-      </template>
-    </ul>
+    </style>
+    <div horizontal layout>
+      <ul flex>
+        <template repeat="{{contact in allContacts | filterContacts(filterOn) | filterLastName(filterLastOn)}}">
+          <li class="contact secondary-text-color" on-tap="{{selectContact}}">{{contact.name.last}}, {{contact.name.first}} </li>
+        </template>
+      </ul>
+      <auto-scroller selectedLetter="{{filterLastOn}}"></auto-scroller>
+    </div>
   </template>
   <script>
     (function () {
       Polymer({
         // define element prototype here
-        filterContacts: function(contacts, filterOn){
+        filterLastName: function(contacts, filterLastOn){
+          if(filterLastOn.length < 1){
+             return contacts;
+          }else{
+            return contacts.filter(function(contact){
+              var letter = contact.name.last.slice(0,1).toUpperCase();
+              if(letter === filterLastOn){
+                return true;
+              }else{
+                return false;
+              }
+            });
+          }
+        },
+        filterContacts: function(contacts, filterOn, lastOnly){
           return contacts.filter(function(contact){
             var pat = new RegExp(filterOn,"i"),
               inLast = pat.test(contact.name.last),
@@ -34,15 +52,16 @@
               if(inFirst || inLast){
                 return true;
               }else{
-                console.log('failed the filter');
                 return false;
               }
           });
         },
         publish:{
           allContacts:[],
+          filterLastOn:'',
           filterOn:'',
-          selContact:{}
+          selContact:{},
+          selectedLetter:''
         },
         selectContact: function(e, detail, elem){
           this.selContact = elem.templateInstance_.model.contact;
