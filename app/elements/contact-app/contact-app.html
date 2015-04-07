@@ -59,7 +59,8 @@
         <core-toolbar layout horizonal>
           <yoso-searchfield hint="Find me..." text="{{searchValue}}" flex></yoso-searchfield>
         </core-toolbar>
-        <div layout horizontal>
+        <div layout horizontal on-selectedcontact="{{contactSelectedEvt}}">
+          <!-- All contacts list -->
           <contacts-list flex id="contactList" selContact="{{selectedContact}}" allContacts="{{contacts | limitToLetter(selectedLetter)}}" filterOn="{{searchValue}}"></contacts-list>
         </div>
       </nav>
@@ -93,6 +94,12 @@
   <script>
     (function () {
       Polymer({
+        contactSelectedEvt: function(e, detail, sender){
+          console.log('heard selectedcontact event:', arguments);
+          this.selectedContact = detail.contact;
+          this.$.scaffold.closeDrawer();
+
+        },
         gotContacts:function(e, detail){
           this.contacts = detail.response.contacts;
         },
@@ -151,10 +158,15 @@
         selectedPage:'scheduledCalls',
         pageTitle: 'Today...',
         selectedContactChanged: function(ov, nv){
-          var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
-          this.changePage('contactCard',title);
-          //Close the drawer.  This only happens if we are in small mode.
-          this.$.scaffold.closeDrawer();
+          console.log('selected contact changed:', ov)
+          console.log('selected contact changed:', nv);
+
+          if(nv !== null){
+            var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
+            this.changePage('contactCard',title);
+            //Close the drawer.  This only happens if we are in small mode.
+            this.$.scaffold.closeDrawer();
+          }
         },
         selectedLetter:''
 

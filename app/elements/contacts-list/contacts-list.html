@@ -65,6 +65,9 @@
         },
         selectContact: function(e, detail, elem){
           this.selContact = elem.templateInstance_.model.contact;
+          //fire a custom event containing the contact info.
+          console.log('firing selected contact');
+          this.fire('selectedcontact',{contact: elem.templateInstance_.model.contact});
         }
       });
     })();

@@ -63,10 +63,12 @@
         selectedContactChanged: function(oV, nV){
           console.log('selected contact changed on contact card:', nV);
           //Update the currentStatus.
-          this.currentStatus = (this.selectedContact.contacts)? this.selectedContact.contacts[0].status : 'cold';
-          //Update notes.
-          // TODO- Right now I show the array in reverse order.  Later this needs to be a filter on the view that sorts by date in each contact
-          this.contactNotes = (this.selectedContact.contacts)? this.selectedContact.contacts.reverse() : [];
+          if(nV !== null){
+            this.currentStatus = (this.selectedContact.contacts)? this.selectedContact.contacts[0].status : 'cold';
+            //Update notes.
+            // TODO- Right now I show the array in reverse order.  Later this needs to be a filter on the view that sorts by date in each contact
+            this.contactNotes = (this.selectedContact.contacts)? this.selectedContact.contacts.reverse() : [];
+          }
         },
         sendEmail:function(){
           console.info('sending an email: ', this.selectedContact.contact.email);
