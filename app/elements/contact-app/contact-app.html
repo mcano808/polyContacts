@@ -150,7 +150,7 @@
         selectedContactChanged: function(ov, nv){
           var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
           this.changePage('contactCard',title);
-          //If we are in small mode make sure the drawer closes.
+          //Close the drawer.  This only happens if we are in small mode.
           this.$.scaffold.closeDrawer();
         },
         selectedLetter:''
