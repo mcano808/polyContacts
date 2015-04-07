@@ -97,7 +97,10 @@
           this.contacts = detail.response.contacts;
         },
         backToScheduledCalls:function (e){
+          //Reset selected contact to null.
+          this.selectedContact = null;
           this.changePage('scheduledCalls', 'Today...');
+
         },
         /**
          * Private method used to set a new page and page title.
