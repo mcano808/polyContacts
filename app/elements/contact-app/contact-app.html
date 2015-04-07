@@ -53,7 +53,7 @@
               handleAs="json"
               on-core-response="{{gotContacts}}">
     </core-ajax>
-    <core-scaffold>
+    <core-scaffold id="scaffold">
       <!-- Left Side Drawer-->
       <nav>
         <core-toolbar layout horizonal>
@@ -150,6 +150,8 @@
         selectedContactChanged: function(ov, nv){
           var title = this.selectedContact.name.last + ', ' + this.selectedContact.name.first;
           this.changePage('contactCard',title);
+          //If we are in small mode make sure the drawer closes.
+          this.$.scaffold.closeDrawer();
         },
         selectedLetter:''
 
