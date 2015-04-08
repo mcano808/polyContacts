@@ -50,9 +50,11 @@
         },
         addNewContact:function(){
           console.info('Adding a new time I contacted this guy:');
+          //Open modal conct window
         },
         callContact:function(){
           console.info('Making a call to the contact: ', this.selectedContact.contact.cell);
+          window.location = 'tel:+18082204994'
         },
         contactNotes:null,
         currentNoteIdx:0,
