@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="2206" measuredH="581" mockupW="1751" mockupH="567">
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="2206" measuredH="925" mockupW="1751" mockupH="911">
   <controls>
     <control controlID="42" controlTypeID="com.balsamiq.mockups::iPhone" x="878" y="71" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="true" isInGroup="-1"/>
     <control controlID="44" controlTypeID="com.balsamiq.mockups::Label" x="904" y="173" w="225" h="-1" measuredW="78" measuredH="21" zOrder="68" locked="false" isInGroup="-1">
@@ -470,6 +470,63 @@
         <borderStyle>none</borderStyle>
         <color>16777215</color>
         <icon>%24ACCOUNT/assets/icon_material%2520content%2520add%2520circle%2520outline.png%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="178" controlTypeID="com.balsamiq.mockups::Canvas" x="1841" y="679" w="360" h="246" measuredW="100" measuredH="70" zOrder="70" locked="false" isInGroup="-1"/>
+    <control controlID="179" controlTypeID="com.balsamiq.mockups::Title" x="1888" y="636" w="-1" h="-1" measuredW="266" measuredH="43" zOrder="71" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Follow%20Up%20card</text>
+      </controlProperties>
+    </control>
+    <control controlID="180" controlTypeID="com.balsamiq.mockups::Label" x="1853" y="694" w="116" h="-1" measuredW="105" measuredH="21" zOrder="72" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Called%20Jan%201%202015</text>
+      </controlProperties>
+    </control>
+    <control controlID="181" controlTypeID="com.balsamiq.mockups::TextArea" x="1848" y="723" w="343" h="107" measuredW="200" measuredH="140" zOrder="73" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Notes...</text>
+      </controlProperties>
+    </control>
+    <control controlID="186" controlTypeID="com.balsamiq.mockups::HSlider" x="2000" y="698" w="166" h="-1" measuredW="33" measuredH="11" zOrder="74" locked="false" isInGroup="-1">
+      <controlProperties>
+        <value>65</value>
+      </controlProperties>
+    </control>
+    <control controlID="187" controlTypeID="com.balsamiq.mockups::Label" x="1978" y="691" w="-1" h="-1" measuredW="21" measuredH="24" zOrder="75" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>10066329</color>
+        <size>16</size>
+        <text>No</text>
+      </controlProperties>
+    </control>
+    <control controlID="188" controlTypeID="com.balsamiq.mockups::Label" x="2166" y="691" w="-1" h="-1" measuredW="27" measuredH="24" zOrder="76" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>10066329</color>
+        <size>16</size>
+        <text>Yes</text>
+      </controlProperties>
+    </control>
+    <control controlID="189" controlTypeID="com.balsamiq.mockups::Button" x="1853" y="875" w="113" h="27" measuredW="64" measuredH="27" zOrder="77" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="190" controlTypeID="com.balsamiq.mockups::Button" x="2068" y="875" w="113" h="27" measuredW="45" measuredH="27" zOrder="78" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="191" controlTypeID="com.balsamiq.mockups::Label" x="1853" y="839" w="338" h="-1" measuredW="139" measuredH="21" zOrder="79" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Follw%20up%20on%3A%20%20Feb%201%202015</text>
+      </controlProperties>
+    </control>
+    <control controlID="192" controlTypeID="com.balsamiq.mockups::StickyNote" x="1549" y="779" w="256" h="123" measuredW="109" measuredH="123" zOrder="80" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Todo%20for%20next%20version%3A%0A%20%0A-Add%20Todo%20list%20that%20can%20be%20checked%20off%20for%20each%20interaction%20as%20a%20seperate%20section%20from%20notes.</text>
       </controlProperties>
     </control>
   </controls>

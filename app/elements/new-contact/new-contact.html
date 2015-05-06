@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../interaction-card/interaction-card.html">
 
 <polymer-element name="new-contact" attributes="">
   <template>
@@ -25,14 +26,6 @@
       <paper-input-decorator label="Email" floatingLabel error="Required" autoValidate>
         <input is="core-input" required value="{{newContact.contact.email}}">
       </paper-input-decorator>
-      <div layout horizontal>
-        <div>
-          Status:{{newContact.status}}
-        </div>
-        <div flex>
-          <paper-slider pin snaps max="4" step="1" id="status" style="width:100%"></paper-slider>
-        </div>
-      </div>
       <div flex>
         <paper-input-decorator label="Notes..." floatingLabel>
           <paper-autogrow-textarea>
@@ -40,6 +33,7 @@
           </paper-autogrow-textarea>
         </paper-input-decorator>
       </div>
+      <interaction-card flex></interaction-card>
     </div>
   </template>
   <script>
@@ -47,31 +41,7 @@
       Polymer({
         ready: function(){
           var status = this.$.status,
-          contactStatus = this.newContact.status,
-          that = this;
-          // When the slide changes we take the value and convert it to a word with meaning.
-          status.addEventListener('core-change', function(e){
-            console.info('core-change', e);
-            //Set the word value based on the step value.
-            //TODO change the color of the slider bar based on case below.
-            switch (status.value){
-              case 0:
-                that.newContact.status = 'Freezing';
-                break;
-              case 1:
-                that.newContact.status = 'Cold';
-                break;
-              case 2:
-                that.newContact.status = 'Neutral';
-                break;
-              case 3:
-                that.newContact.status = 'Warm';
-                break;
-              case 4:
-                that.newContact.status = 'Hot';
-                break;
-            }
-          });
+          contactStatus = this.newContact.status;
         },
         // define element prototype here
         newContact:{

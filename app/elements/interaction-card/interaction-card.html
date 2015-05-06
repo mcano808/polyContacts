@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/polymer-date-picker/polymer-date-picker.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<polymer-element name="interaction-card" attributes="contactDate followUpDate notes statuts" vertical layout>
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid black;
+      }
+    </style>
+    <div horizontal layout center style="border:1px solid black">
+      <!-- Date picker will go here -->
+      <input id="contactDateTrigger" on-click="{{showPicker}}" readonly class="date">
+      <polymer-date-picker id="contactDatePicker" selectedDate="{{contactDate}}" relatedTarget="{{$.contactDateTrigger}}" opened="false"></polymer-date-picker>
+      Status: {{status}} <paper-slider pin snaps max="4" step="1" id="status" value="{{status}}"></paper-slider>
+    </div>
+    <div flex style="border:1px solid black">
+        <paper-input-decorator label="Notes..." floatingLabel>
+          <paper-autogrow-textarea>
+            <textarea style="width:100%" value="{{notes}}"></textarea>
+          </paper-autogrow-textarea>
+        </paper-input-decorator>
+    </div>
+    <div horizontal layout style="border:1px solid black">
+      Follow Up on <input type="date" value="{{followUpDate}}">
+    </div>
+  </template>
+  <script>
+    (function () {
+      var today = new Date();
+      Polymer({
+        publish:{
+          followUpDate:'',
+          notes:'',
+          status:''
+        },
+        ready:function(){
+          //default the value to neutral setting.
+          this.$.status.value = 3;
+        },
+        showPicker:function(){
+          console.log('got click on picker:', this.$.contactDatePicker);
+          this.$.contactDatePicker.toggle();
+        },
+        convertStatus: function(input){
+          console.log('converting status based on input:', input);
+          //Switch case that takes number and returns corret label for it.
+        }
+      });
+    })();
+  </script>
+</polymer-element>

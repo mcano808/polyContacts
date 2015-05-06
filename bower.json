@@ -6,7 +6,8 @@
     "paper-elements": "Polymer/paper-elements#~0.5.5",
     "polymer": "Polymer/polymer",
     "yoso-searchfield": "~0.1.0",
-    "polymer-filters": "~0.2.1"
+    "polymer-filters": "~0.2.1",
+    "polymer-date-picker": "~0.0.11"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester"
